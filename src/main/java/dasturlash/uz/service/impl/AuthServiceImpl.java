@@ -16,24 +16,4 @@ public class AuthServiceImpl
     public AuthServiceImpl(ProfileRepository repository, ProfileMapper mapper) {
         super(repository, mapper);
     }
-
-    @Override
-    public ProfileEntity save(ProfileDTO dto) {
-        return null;
-    }
-
-    @Override
-    public ProfileEntity update(ProfileDTO dto) {
-        return null;
-    }
-
-    @Override
-    public ProfileEntity findById(String id) {
-        return null;
-    }
-
-    @Override
-    public void delete(String id) {
-
-    }
 }

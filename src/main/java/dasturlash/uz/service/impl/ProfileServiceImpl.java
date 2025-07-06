@@ -6,32 +6,14 @@ import dasturlash.uz.entity.ProfileEntity;
 import dasturlash.uz.mapper.ProfileMapper;
 import dasturlash.uz.repository.ProfileRepository;
 import dasturlash.uz.service.ProfileService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProfileServiceImpl
         extends BaseServiceImpl<ProfileRepository, ProfileMapper, ProfileDTO, ProfileEntity>
         implements ProfileService {
 
     public ProfileServiceImpl(ProfileRepository repository, ProfileMapper mapper) {
         super(repository, mapper);
-    }
-
-    @Override
-    public ProfileEntity save(ProfileDTO dto) {
-        return null;
-    }
-
-    @Override
-    public ProfileEntity update(ProfileDTO dto) {
-        return null;
-    }
-
-    @Override
-    public ProfileEntity findById(String id) {
-        return null;
-    }
-
-    @Override
-    public void delete(String id) {
-
     }
 }
