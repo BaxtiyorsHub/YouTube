@@ -6,7 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class ProfileDTO {
-    private String id;
+    //private String id;
     private String name;
     private String surname;
     private String email;
