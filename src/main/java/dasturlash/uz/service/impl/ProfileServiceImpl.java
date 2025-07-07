@@ -8,12 +8,22 @@ import dasturlash.uz.repository.ProfileRepository;
 import dasturlash.uz.service.ProfileService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ProfileServiceImpl
         extends BaseServiceImpl<ProfileRepository, ProfileMapper, ProfileDTO, ProfileEntity>
         implements ProfileService {
 
-    public ProfileServiceImpl(ProfileRepository repository, ProfileMapper mapper) {
+    private final ProfileRepository profileRepository;
+
+    public ProfileServiceImpl(ProfileRepository repository, ProfileMapper mapper, ProfileRepository profileRepository) {
         super(repository, mapper);
+        this.profileRepository = profileRepository;
+    }
+
+    @Override
+    public Optional<ProfileEntity> findByUsernameAndVisibleIsTrue(String username) {
+        return profileRepository.findByEmailAndVisibleIsTrue(username).or(Optional::empty);
     }
 }

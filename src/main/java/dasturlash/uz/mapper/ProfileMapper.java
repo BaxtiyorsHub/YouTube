@@ -6,7 +6,6 @@ import dasturlash.uz.entity.ProfileEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
 public interface ProfileMapper extends BaseMapper<ProfileDTO, ProfileEntity> {
