@@ -1,8 +1,8 @@
 package dasturlash.uz.service.impl;
 
+import dasturlash.uz.dto.ProfileDTO;
 import dasturlash.uz.mapper.ProfileMapper;
 import dasturlash.uz.base.impl.BaseServiceImpl;
-import dasturlash.uz.dto.ProfileDTO;
 import dasturlash.uz.entity.ProfileEntity;
 import dasturlash.uz.repository.ProfileRepository;
 import dasturlash.uz.service.AuthService;

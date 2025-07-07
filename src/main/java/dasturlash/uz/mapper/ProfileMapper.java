@@ -1,6 +1,7 @@
 package dasturlash.uz.mapper;
 
 import dasturlash.uz.base.BaseMapper;
+import dasturlash.uz.dto.AuthDTO;
 import dasturlash.uz.dto.ProfileDTO;
 import dasturlash.uz.entity.ProfileEntity;
 import org.mapstruct.Mapper;
