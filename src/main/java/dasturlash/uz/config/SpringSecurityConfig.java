@@ -12,6 +12,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -31,7 +32,8 @@ public class SpringSecurityConfig {
     public static final String[] openApiList = {
             "/auth/login",
             "/auth/register",
-            "/profile/me"
+            "/profile/me",
+            "/category/create"
     };
 
     @Bean
@@ -46,14 +48,17 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorize -> {
-            authorize.requestMatchers(openApiList).permitAll();
-            authorize.anyRequest().authenticated();
-
-            // controllerda metod ustiga yozib ketishimiz shart bu yerda yozib o'tirmadim
+            authorize
+                    .requestMatchers(openApiList).permitAll()
+                    .anyRequest().authenticated();  // controllerda metod ustiga yozib ketishimiz shart bu yerda yozib o'tirmadim
 
         }).addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.httpBasic(Customizer.withDefaults());
+
+        http.csrf(AbstractHttpConfigurer::disable);
+        http.cors(AbstractHttpConfigurer::disable);
+
         return http.build();
     }
 }
