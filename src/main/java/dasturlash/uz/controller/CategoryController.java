@@ -17,12 +17,12 @@ public class CategoryController {
 
     @PostMapping("/create")
     @PermitAll
-    public ResponseEntity<CategoryEntity> createCategory(@RequestBody CategoryDTO dto){
+    public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO dto){
         return ResponseEntity.ok(categoryService.create(dto));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<CategoryEntity> updateCategory(
+    public ResponseEntity<CategoryDTO> updateCategory(
             @RequestBody CategoryDTO dto,
             @PathVariable String id){
         return ResponseEntity.ok(categoryService.update(id,dto));
