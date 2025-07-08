@@ -14,6 +14,5 @@ public interface ProfileService extends BaseService<ProfileDTO, ProfileEntity> {
      * @param username
      * @return {@code Optional<ProfileEntity>}
      * */
-    @Query("select p from ProfileEntity p where p.email=?1 and p.visible = true ")
     Optional<ProfileEntity> findByUsernameAndVisibleIsTrue(String username);
 }
