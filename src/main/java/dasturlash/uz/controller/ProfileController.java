@@ -1,5 +1,6 @@
 package dasturlash.uz.controller;
 
+import dasturlash.uz.dto.ProfileDTO;
 import dasturlash.uz.entity.ProfileEntity;
 import dasturlash.uz.service.ProfileService;
 import dasturlash.uz.service.impl.ProfileServiceImpl;
@@ -18,7 +19,7 @@ public class ProfileController {
     private final ProfileService profileService;
 
     @GetMapping("/me")
-    public ResponseEntity<ProfileEntity> me(){
-        return ResponseEntity.ok(profileService.get(SpringSecurityUtil.getUserId()));
+    public ResponseEntity<ProfileDTO> me(){
+        return ResponseEntity.ok(profileService.getDTO(SpringSecurityUtil.getUserId()));
     }
 }
