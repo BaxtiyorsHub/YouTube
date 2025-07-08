@@ -36,8 +36,8 @@ public class AuthServiceImpl
 
     @SneakyThrows
     @Override
-    public String createRegistrationCode(String email) {
-        Optional<ProfileEntity> result = profileService.findByUsernameAndVisibleIsTrue(email);
+    public String createRegistrationCode(AuthDTO dto) {
+        Optional<ProfileEntity> result = profileService.findByUsernameAndVisibleIsTrue(dto.getEmail());
         if (result.isPresent()) {
             if (result.get().getStatus().equals(ProfileStatus.NOT_ACTIVE)){
                 profileService.delete(result.get().getId());
@@ -45,8 +45,7 @@ public class AuthServiceImpl
             throw new AppBadException("Username already exists");
         }
 
-        emailSenderService.sendRegistrationCode(result.get().getEmail());
-        return "Verification code sent to your email";
+        return emailSenderService.sendRegistrationCode(result.get().getEmail());
     }
 
     @SneakyThrows

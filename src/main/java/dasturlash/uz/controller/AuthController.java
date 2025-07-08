@@ -15,10 +15,10 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(
+    public ResponseEntity<String> register(
             @RequestBody AuthDTO dto
     ){
-        return ResponseEntity.ok(authService.create(dto));
+        return ResponseEntity.ok(authService.createRegistrationCode(dto));
     }
 
     @PutMapping("/verification")

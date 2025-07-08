@@ -41,15 +41,7 @@ public class EmailServiceImpl
         return super.create(dto);
     }
 
-
-
-    @Override
-    public void sendRegistrationCode(String email) {
-        int codeForReg = RandomUtil.fiveDigit();
-
-    }
-
-    public void sendRegistrationStyledEmail(String toAccount) {
+    public String sendRegistrationCode(String email) {
         Integer smsCode = RandomUtil.fiveDigit();
         String body = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
@@ -59,7 +51,7 @@ public class EmailServiceImpl
                 "</head>\n" +
                 "<body>\n" +
                 "\n" +
-                "<h1 style=\"text-align: center\">Kunuz Portaliga xush kelibsiz.</h1>\n" +
+                "<h1 style=\"text-align: center\">YouTubega xush kelibsiz.</h1>\n" +
                 "<br>\n" +
                 "<h4>Ro'yhatdan o'tishni tugatish uchun quyidagi linkga bosing</h4>\n" +
                 "<a style=\" background-color: indianred;\n" +
@@ -74,16 +66,18 @@ public class EmailServiceImpl
                 "\n" +
                 "</body>\n" +
                 "</html>";
-        String jwtToken = JwtUtil.encodeForRegistration(toAccount, smsCode);
+        String jwtToken = JwtUtil.encodeForRegistration(email, smsCode);
         body = String.format(body, serverUrl, jwtToken);
         // send
-        sendMimeMessage("Registration complete", body, toAccount);
+        String registrationComplete = sendMimeMessage("Registration", body, email);
         // save to db
         EmailDTO emailDTO = new EmailDTO();
-        emailDTO.setEmail(toAccount);
+        emailDTO.setEmail(email);
         emailDTO.setBody(body);
+        emailDTO.setCode(smsCode);
 
-       // super.create(body, smsCode, toAccount);
+        super.create(emailDTO);
+        return registrationComplete;
     }
 
     private String sendMimeMessage(String subject, String body, String toAccount) {
@@ -100,6 +94,6 @@ public class EmailServiceImpl
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
-        return "Mail was send";
+        return "Verification code sent to " + toAccount + "check your email";
     }
 }

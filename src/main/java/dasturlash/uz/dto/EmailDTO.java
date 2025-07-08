@@ -15,5 +15,6 @@ public class EmailDTO {
     private String email;
     private String body;
 
+    private Integer code;
     private LocalDateTime createdDate;
 }
