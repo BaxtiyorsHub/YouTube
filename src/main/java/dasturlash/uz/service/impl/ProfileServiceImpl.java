@@ -2,6 +2,7 @@ package dasturlash.uz.service.impl;
 
 import dasturlash.uz.base.impl.BaseServiceImpl;
 import dasturlash.uz.dto.ProfileDTO;
+import dasturlash.uz.dto.ProfilePasswordDTO;
 import dasturlash.uz.entity.ProfileEntity;
 import dasturlash.uz.mapper.ProfileMapper;
 import dasturlash.uz.repository.ProfileRepository;
@@ -26,4 +27,14 @@ public class ProfileServiceImpl
     public Optional<ProfileEntity> findByUsernameAndVisibleIsTrue(String username) {
         return profileRepository.findByEmailAndVisibleIsTrue(username).or(Optional::empty);
     }
+
+    @Override
+    public Boolean changePassword(ProfilePasswordDTO newPassword) {
+        Optional<ProfileEntity> optional = profileRepository.findByIdAndVisibleIsTrue(newPassword.getId());
+        if(optional.isPresent()){
+            super.update(newPassword.getId(), optional.get());
+        }
+    }
+
+
 }
