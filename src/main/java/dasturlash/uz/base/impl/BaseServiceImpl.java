@@ -2,6 +2,7 @@ package dasturlash.uz.base.impl;
 
 import dasturlash.uz.base.BaseMapper;
 import dasturlash.uz.base.BaseService;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract class BaseServiceImpl<
@@ -20,23 +21,38 @@ public abstract class BaseServiceImpl<
     }
 
     @Override
-    public E create(D dto) {
-        E entity = mapper.toEntity(dto);
-        return repository.save(entity);
+    @Transactional
+    public D create(D dto) {
+        if (dto == null) throw new RuntimeException("DTO can't be null!");
+        return mapper
+                .toDTO(repository
+                        .save(mapper
+                                .toEntity(dto)));
     }
 
     @Override
-    public E get(String id) {
+    public E getEntity(String id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Not found!"));
     }
+
     @Override
-    public E update(String id, D dto) {
-        E e = get(id);
-        return repository.save(mapper.toUpdateEntity(dto, e));
+    public D getDTO(String id) {
+        return repository.findById(id).map(mapper::toDTO).orElseThrow(() -> new RuntimeException("Not found!"));
     }
+
     @Override
+    @Transactional
+    public D update(String id, D dto) {
+        E e = getEntity(id);
+        return mapper
+                .toDTO(
+                        repository.save(mapper.toUpdateEntity(dto, e)));
+    }
+
+    @Override
+    @Transactional
     public boolean delete(String id) {
-        E e = get(id);
+        E e = getEntity(id);
         repository.delete(e);
         return true;
     }
