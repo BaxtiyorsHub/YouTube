@@ -7,5 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public interface EmailSenderService extends BaseService<EmailDTO, EmailEntity> {
 
-    void sendRegistrationCode(@NotBlank(message = "Username required") String email);
+    String sendRegistrationCode(@NotBlank(message = "Username required") String email);
+
+    boolean isCodeValid(String username, Integer code);
 }

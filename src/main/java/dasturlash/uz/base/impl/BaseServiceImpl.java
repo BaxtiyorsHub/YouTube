@@ -57,4 +57,9 @@ public abstract class BaseServiceImpl<
         return true;
     }
 
+    @Override
+    public D save(E entity) {
+        if (entity == null) throw new RuntimeException("Entity can't be null!");
+        return mapper.toDTO(repository.save(entity));
+    }
 }
