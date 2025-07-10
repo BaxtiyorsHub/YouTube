@@ -21,4 +21,7 @@ public class AuthDTO {
     private String password;
 
     private String attachId;
+
+    private String jwt;
+    private String refreshToken;
 }
