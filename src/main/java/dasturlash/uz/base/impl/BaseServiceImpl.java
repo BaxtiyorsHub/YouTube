@@ -52,8 +52,7 @@ public abstract class BaseServiceImpl<
     @Override
     @Transactional
     public boolean delete(String id) {
-        E e = getEntity(id);
-        repository.delete(e);
+        repository.delete(getEntity(id));
         return true;
     }
 

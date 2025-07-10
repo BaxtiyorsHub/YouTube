@@ -1,6 +1,7 @@
 package dasturlash.uz.entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Setter(AccessLevel.NONE)
     private String id;
     @Column(name = "name_uz")
     private String nameUz;
@@ -27,5 +29,6 @@ public class CategoryEntity {
     private boolean visible = true;
     @Column(name = "created_date")
     @CreationTimestamp
+    @Setter(AccessLevel.NONE)
     private LocalDateTime createdDate;
 }

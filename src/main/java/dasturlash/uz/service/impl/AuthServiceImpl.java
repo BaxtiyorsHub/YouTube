@@ -93,7 +93,10 @@ public class AuthServiceImpl
             if (!bCryptPasswordEncoder.matches(authorization.getPassword(), profileEntity.getPassword())) {
                 throw new AppBadException("Username or password wrong");
             }
-            return authMapper.toDTO(profileEntity);
+            AuthDTO dto = authMapper.toDTO(profileEntity);
+            dto.setJwt(JwtUtil.encode(profileEntity.getEmail(), profileEntity.getRole()));
+            dto.setRefreshToken(JwtUtil.refreshToken(profileEntity.getEmail(), profileEntity.getRole().name()));
+            return dto;
         }
         throw new AppBadException("User not found");
     }
