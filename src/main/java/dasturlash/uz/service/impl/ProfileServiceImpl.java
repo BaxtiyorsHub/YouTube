@@ -2,6 +2,8 @@ package dasturlash.uz.service.impl;
 
 import dasturlash.uz.base.impl.BaseServiceImpl;
 import dasturlash.uz.dto.ProfileDTO;
+import dasturlash.uz.dto.ProfileDetailDTO;
+import dasturlash.uz.dto.ProfileEmailDTO;
 import dasturlash.uz.dto.ProfilePasswordDTO;
 import dasturlash.uz.entity.ProfileEntity;
 import dasturlash.uz.mapper.ProfileMapper;
@@ -29,11 +31,40 @@ public class ProfileServiceImpl
     }
 
     @Override
-    public Boolean changePassword(ProfilePasswordDTO newPassword) {
+    public String changePassword(ProfilePasswordDTO newPassword) {
         Optional<ProfileEntity> optional = profileRepository.findByIdAndVisibleIsTrue(newPassword.getId());
         if(optional.isPresent()){
-            super.update(newPassword.getId(), optional.get());
+            ProfileEntity profileEntity = optional.get();
+            profileEntity.setPassword(newPassword.getNewPassword());
+            profileRepository.save(profileEntity);
+            return "password changed";
         }
+        return "something went wrong";
+    }
+
+    @Override
+    public String updateEmail(ProfileEmailDTO profileEmailDTO) {
+        Optional<ProfileEntity> optional = profileRepository.findByEmailAndVisibleIsTrue(profileEmailDTO.getOldEmail());
+        if(optional.isPresent()){
+            ProfileEntity profileEntity = optional.get();
+            profileEntity.setEmail(profileEmailDTO.getNewEmail());
+            profileRepository.save(profileEntity);
+            return "email changed";
+        }
+        return "something went wrong";
+    }
+
+    @Override
+    public ProfileDetailDTO updateDetail(ProfileDetailDTO profileDetailDTO) {
+        Optional<ProfileEntity> optional = profileRepository.findByIdAndVisibleIsTrue(profileDetailDTO.getId());
+        if(optional.isPresent()){
+            ProfileEntity profileEntity = optional.get();
+            profileEntity.setName(profileDetailDTO.getName());
+            profileEntity.setSurname(profileDetailDTO.getSurname());
+            profileRepository.save(profileEntity);
+            return profileDetailDTO;
+        }
+        return null;
     }
 
 

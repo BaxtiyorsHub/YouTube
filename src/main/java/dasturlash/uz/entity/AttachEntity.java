@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 public class AttachEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Setter(AccessLevel.NONE)
     private String id;
 
     @Column(name = "original_name")
