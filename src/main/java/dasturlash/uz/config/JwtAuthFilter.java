@@ -29,7 +29,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         AntPathMatcher antPathMatcher = new AntPathMatcher();
         return Arrays
-                .stream(SpringSecurityConfig.openApiList)
+                .stream(SpringSecurityConfig.OPEN_API_LIST)
                 .anyMatch(s -> antPathMatcher.match(s, request.getRequestURI()));
     }
 

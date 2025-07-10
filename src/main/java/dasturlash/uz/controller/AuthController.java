@@ -27,7 +27,8 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<AuthDTO> login(@RequestBody AuthorizationDTO authorization){
+    public ResponseEntity<AuthDTO> login(
+            @RequestBody AuthorizationDTO authorization){
         return ResponseEntity.ok(authService.login(authorization));
     }
 }
