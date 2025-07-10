@@ -34,7 +34,9 @@ public class    SpringSecurityConfig {
             "/auth/login",
             "/auth/verification",
             "/profile/me",
-            "/category/all"
+            "/category/all",
+            "/tag/tag-all",
+            "/tag/create"
     };
 
     @SneakyThrows
