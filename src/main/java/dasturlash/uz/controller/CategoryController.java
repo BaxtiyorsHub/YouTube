@@ -6,6 +6,7 @@ import dasturlash.uz.service.CategoryService;
 import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,7 +17,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping("/create")
-    @PermitAll
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO dto){
         return ResponseEntity.ok(categoryService.create(dto));
     }
