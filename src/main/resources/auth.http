@@ -13,9 +13,6 @@ Content-Type: application/json
   "password": "12345"
 }
 
-### verification
-PUT localhost:8080/auth/verification/{token}
-
 ### login
 GET localhost:8080/auth/login
 Content-Type: application/json

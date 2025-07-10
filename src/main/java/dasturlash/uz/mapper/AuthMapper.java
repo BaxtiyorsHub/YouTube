@@ -16,6 +16,6 @@ public interface AuthMapper extends BaseMapper<AuthDTO, ProfileEntity> {
     AuthDTO toDTO(ProfileEntity entity);
 
     @Override
-    @Mapping(target = "id", ignore = true)
+    //@Mapping(target = "id", ignore = true)
     ProfileEntity toUpdateEntity(AuthDTO dto, @MappingTarget ProfileEntity entity);
 }
