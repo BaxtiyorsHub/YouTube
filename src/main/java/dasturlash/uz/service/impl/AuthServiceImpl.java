@@ -3,7 +3,7 @@ package dasturlash.uz.service.impl;
 import dasturlash.uz.dto.AuthDTO;
 import dasturlash.uz.dto.AuthorizationDTO;
 import dasturlash.uz.dto.JwtDTO;
-import dasturlash.uz.enums.ProfileStatus;
+import dasturlash.uz.enums.GeneralStatus;
 import dasturlash.uz.exp.AppBadException;
 import dasturlash.uz.mapper.AuthMapper;
 import dasturlash.uz.base.impl.BaseServiceImpl;
@@ -47,7 +47,7 @@ public class AuthServiceImpl
     public String createRegistrationCode(AuthDTO dto) {
         Optional<ProfileEntity> result = profileService.findByUsernameAndVisibleIsTrue(dto.getEmail());
         if (result.isPresent()) {
-            if (result.get().getStatus().equals(ProfileStatus.NOT_ACTIVE)) {
+            if (result.get().getStatus().equals(GeneralStatus.NOT_ACTIVE)) {
                 profileService.delete(result.get().getId());
             }
             throw new AppBadException("Username already exists");
@@ -75,7 +75,7 @@ public class AuthServiceImpl
                 .findByUsernameAndVisibleIsTrue(decoded.getUsername())
                 .orElseThrow(() -> new AppBadException("User not found"));
 
-        if (!profileEntity.getStatus().equals(ProfileStatus.NOT_ACTIVE))
+        if (!profileEntity.getStatus().equals(GeneralStatus.NOT_ACTIVE))
             throw new AppBadException("User already verified");
 
         if (emailSenderService.isCodeValid(decoded.getUsername(), decoded.getCode())) return "Verification successful";
@@ -88,7 +88,7 @@ public class AuthServiceImpl
         Optional<ProfileEntity> profile = profileService.findByUsernameAndVisibleIsTrue(authorization.getEmail());
         if (profile.isPresent()) {
             ProfileEntity profileEntity = profile.get();
-            if (!profileEntity.getStatus().equals(ProfileStatus.ACTIVE))
+            if (!profileEntity.getStatus().equals(GeneralStatus.ACTIVE))
                 throw new AppBadException("Profile field not match");
             if (!bCryptPasswordEncoder.matches(authorization.getPassword(), profileEntity.getPassword())) {
                 throw new AppBadException("Username or password wrong");
