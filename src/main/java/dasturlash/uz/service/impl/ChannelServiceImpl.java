@@ -11,6 +11,8 @@ import dasturlash.uz.service.ChannelService;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ChannelServiceImpl
         extends BaseServiceImpl<ChannelRepository, ChannelMapper, ChannelDTO, ChannelEntity>
@@ -42,16 +44,26 @@ public class ChannelServiceImpl
             channelRepository.changeStatus(id,stat);
             return channelMapper.toDTO(channelRepository.findById(id).orElseThrow());
         }
-        throw new AppBadException("WTH is that piece of shit!");
+        throw new AppBadException("WTH is that piece of shit! channel");
     }
 
     @Override
+    @SneakyThrows
     public Iterable<ChannelDTO> getUserChannels(String userId) {
-        return null;
+        return channelRepository.getUserChannels(userId)
+                .orElseThrow(Exception::new)
+                .stream()
+                .map(channelMapper::toDTO)
+                .toList();
     }
 
     @Override
-    public Iterable<ChannelDTO> getAllChannels() {
-        return null;
+    @SneakyThrows
+    public List<ChannelDTO> getAllChannels() {
+        return channelRepository.getAll()
+                .orElseThrow(Exception::new)
+                .stream()
+                .map(channelMapper::toDTO)
+                .toList();
     }
 }
