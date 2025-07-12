@@ -8,7 +8,7 @@ import dasturlash.uz.enums.GeneralStatus;
 public interface ChannelService extends BaseService<ChannelDTO, ChannelEntity> {
     ChannelDTO updatePhoto(String id, ChannelDTO dto);
 
-    ChannelDTO updateBanner(String id, ChannelDTO dto);
+    ChannelDTO updateBanner(ChannelDTO dto);
 
     ChannelDTO changeStat(String id, GeneralStatus stat);
 

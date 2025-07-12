@@ -45,10 +45,9 @@ public class ChannelController {
     @PutMapping("/update-channel-banner")
     @RolesAllowed({"USER","OWNER"})
     public ResponseEntity<ChannelDTO> updateBanner(
-            @RequestParam String id,
             @RequestParam ChannelDTO dto
     ) {
-        return ResponseEntity.ok(channelService.updateBanner(id, dto));
+        return ResponseEntity.ok(channelService.updateBanner(dto));
     }
 
     @GetMapping("/all-channels")

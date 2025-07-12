@@ -33,7 +33,13 @@ public class ChannelServiceImpl
     }
 
     @Override
-    public ChannelDTO updateBanner(String id, ChannelDTO dto) {
+    @SneakyThrows
+    public ChannelDTO updateBanner(ChannelDTO dto) {
+        ChannelEntity channel = channelRepository.findById(dto.getId())
+                .orElseThrow(Exception::new);
+        if (!channel.getProfileId().equals(dto.getProfileId())) throw new AppBadException("Something went wrong channel");
+        // ownerlarga chcek qilish kerak
+        channel.setBanner(dto.getBanner());
         return null;
     }
 
