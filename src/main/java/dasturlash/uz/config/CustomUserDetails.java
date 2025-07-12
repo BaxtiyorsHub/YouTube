@@ -2,7 +2,7 @@ package dasturlash.uz.config;
 
 import dasturlash.uz.entity.ProfileEntity;
 import dasturlash.uz.enums.ProfileRole;
-import dasturlash.uz.enums.ProfileStatus;
+import dasturlash.uz.enums.GeneralStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class CustomUserDetails implements UserDetails {
     private String username;
     private ProfileEntity profile;
     private String password;
-    private ProfileStatus status;
+    private GeneralStatus status;
     private ProfileRole role;
 
     @Override
@@ -37,7 +37,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return status.equals(ProfileStatus.ACTIVE);
+        return status.equals(GeneralStatus.ACTIVE);
     }
 
     @Override

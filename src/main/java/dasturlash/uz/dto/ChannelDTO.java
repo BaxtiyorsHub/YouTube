@@ -7,11 +7,13 @@ import lombok.Setter;
 @Setter
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProfileDTO {
+public class ChannelDTO {
     private String id;
     private String name;
-    private String surname;
-    private String email;
-    private String password;
-    private String attachId;
+    private String photoId;
+    private AttachDTO photo;
+    private String description;
+    private String banner;
+    private String profileId;
+    private ProfileDTO profile;
 }

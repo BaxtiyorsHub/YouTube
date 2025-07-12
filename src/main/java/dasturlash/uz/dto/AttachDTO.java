@@ -7,11 +7,12 @@ import lombok.Setter;
 @Setter
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProfileDTO {
+public class AttachDTO {
     private String id;
-    private String name;
-    private String surname;
-    private String email;
-    private String password;
-    private String attachId;
+    private String originalName;
+    private Long size;
+    private String extension;
+    private String path;
+    private String duration;
 }
+

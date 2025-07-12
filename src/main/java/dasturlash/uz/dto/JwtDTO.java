@@ -1,11 +1,13 @@
 package dasturlash.uz.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import dasturlash.uz.enums.ProfileRole;
 import lombok.*;
 
 @Setter
 @Getter
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class JwtDTO {
     private String username;
     private ProfileRole role;

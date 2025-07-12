@@ -1,13 +1,12 @@
 package dasturlash.uz.entity;
 
 import dasturlash.uz.enums.ProfileRole;
-import dasturlash.uz.enums.ProfileStatus;
+import dasturlash.uz.enums.GeneralStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
 
@@ -42,7 +41,7 @@ public class ProfileEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private ProfileStatus status = ProfileStatus.NOT_ACTIVE;
+    private GeneralStatus status = GeneralStatus.NOT_ACTIVE;
 
     @Column(name = "visible")
     private boolean visible = true;
