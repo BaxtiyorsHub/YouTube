@@ -1,6 +1,8 @@
 package dasturlash.uz.enums;
 
 public enum ProfileRole {
-    ADMIN,
+    SUPER_ADMIN,
     USER,
+    OWNER,
+    CHANNEL_ADMIN
 }
