@@ -4,7 +4,6 @@ import dasturlash.uz.dto.JwtDTO;
 import dasturlash.uz.enums.ProfileRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,8 +12,6 @@ import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import static io.jsonwebtoken.SignatureAlgorithm.*;
 
 public class JwtUtil {
     private static final int tokenLiveTime = 1000 * 3600 * 24; // 1-day
