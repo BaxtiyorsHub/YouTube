@@ -40,6 +40,11 @@ public abstract class BaseServiceImpl<
         return repository.findById(id).map(mapper::toDTO).orElseThrow(() -> new RuntimeException("Not found!"));
     }
 
+    /**
+     * @param id of entity
+     * @param dto
+     * @return DTO
+     * */
     @Override
     @Transactional
     public D update(String id, D dto) {
