@@ -1,6 +1,7 @@
 package dasturlash.uz.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import dasturlash.uz.enums.ChannelStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,4 +17,5 @@ public class ChannelDTO {
     private String banner;
     private String profileId;
     private ProfileDTO profile;
+    private ChannelStatus status;
 }
