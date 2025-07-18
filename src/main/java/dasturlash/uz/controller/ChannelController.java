@@ -3,9 +3,11 @@ package dasturlash.uz.controller;
 import dasturlash.uz.dto.ChannelDTO;
 import dasturlash.uz.enums.GeneralStatus;
 import dasturlash.uz.service.ChannelService;
+import dasturlash.uz.util.PageCheckUtil;
 import dasturlash.uz.util.SpringSecurityUtil;
 import jakarta.annotation.security.RolesAllowed;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -52,8 +54,12 @@ public class ChannelController {
 
     @GetMapping("/all-channels")
     @Secured("ADMIN")
-    public ResponseEntity<Iterable<ChannelDTO>> getAllChannels() {
-        return ResponseEntity.ok(channelService.getAllChannels());
+    public ResponseEntity<Page<ChannelDTO>> getAllChannels(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        int checked = PageCheckUtil.page(page);
+        return ResponseEntity.ok(channelService.getAllChannels(checked,size));
     }
 
     @GetMapping("/channel")
