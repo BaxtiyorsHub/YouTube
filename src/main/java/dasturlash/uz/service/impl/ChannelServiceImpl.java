@@ -2,6 +2,7 @@ package dasturlash.uz.service.impl;
 
 import dasturlash.uz.base.impl.BaseServiceImpl;
 import dasturlash.uz.dto.ChannelDTO;
+import dasturlash.uz.dto.PlaylistDTO;
 import dasturlash.uz.entity.ChannelEntity;
 import dasturlash.uz.entity.ProfileEntity;
 import dasturlash.uz.enums.GeneralStatus;
@@ -11,6 +12,10 @@ import dasturlash.uz.mapper.ChannelMapper;
 import dasturlash.uz.repository.ChannelRepository;
 import dasturlash.uz.service.ChannelService;
 import lombok.SneakyThrows;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -68,12 +73,18 @@ public class ChannelServiceImpl
 
     @Override
     @SneakyThrows
-    public List<ChannelDTO> getAllChannels() {
-        return channelRepository.getAll()
-                .orElseThrow(Exception::new)
+    public Page<ChannelDTO> getAllChannels(int checked, int size) {
+
+        PageRequest pageRequest = PageRequest.of(checked, size, Sort.by("createdDate").descending());
+
+        Page<ChannelEntity> dtoPage = channelRepository.findAll(pageRequest);
+
+        List<ChannelDTO> response = dtoPage.getContent()
                 .stream()
                 .map(channelMapper::toDTO)
                 .toList();
+
+        return new PageImpl<>(response, pageRequest, dtoPage.getTotalElements());
     }
 
     private ChannelEntity generalCheck(String id, String profileId) throws AppBadException, Exception {
