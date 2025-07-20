@@ -16,7 +16,7 @@ import java.util.Optional;
 public interface ChannelRepository extends JpaRepository<ChannelEntity, String> {
     @Modifying
     @Transactional
-    @Query("update ChannelEntity c set c.status = ? where c.id = ?1 and c.visible = true ")
+    @Query("update ChannelEntity c set c.status = ?2 where c.id = ?1 and c.visible = true ")
     void changeStatus(String id, GeneralStatus name);
 
     @Query("from ChannelEntity where profileId = ?1 and visible = true")
