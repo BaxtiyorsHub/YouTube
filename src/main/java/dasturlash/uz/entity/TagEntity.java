@@ -17,10 +17,13 @@ public class TagEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Setter(AccessLevel.NONE)
     private String id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "visible")
     private boolean visible = true;
+
     @Setter(AccessLevel.NONE)
     @Column(name = "created_date")
     @CreationTimestamp

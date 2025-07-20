@@ -1,5 +1,6 @@
 package dasturlash.uz.entity;
 
+import dasturlash.uz.enums.ChannelStatus;
 import dasturlash.uz.enums.GeneralStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -43,6 +44,10 @@ public class ChannelEntity {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private GeneralStatus status = GeneralStatus.ACTIVE;
+
+    @Column(name = "channel_stat")
+    @Enumerated(EnumType.STRING)
+    private ChannelStatus channelStatus;
 
     @Column(name = "visible")
     private boolean visible = true;

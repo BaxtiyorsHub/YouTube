@@ -18,10 +18,16 @@ public class PlaylistEntity {
     private String id;
 
     @Column(name = "channel_id")
-    private String channel_id;
+    private String channelId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "channel_id", insertable = false, updatable = false)
     private ChannelEntity channel;
+
+    @Column(name = "profile_id")
+    private String profileId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id", insertable = false, updatable = false)
+    private ProfileEntity profile;
 
     @Column(name = "name")
     private String name;
@@ -34,7 +40,7 @@ public class PlaylistEntity {
     private ChannelStatus status;
 
     @Column(name = "order_num")
-    private String order_num;
+    private String orderNum;
 
     @Column(name = "visible")
     private boolean visible = true;

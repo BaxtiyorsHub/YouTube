@@ -9,15 +9,8 @@ import lombok.Setter;
 @Setter
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ChannelDTO {
-    private String id;
-    private String name;
-    private String photoId;
-    private AttachDTO photo;
-    private String description;
-    private String banner;
-    private String profileId;
+public class PlaylistInfoDTO extends PlaylistDTO {
+    private ChannelStatus status;
+    private ChannelDTO channel;
     private ProfileDTO profile;
-    private GeneralStatus status;
-    private ChannelStatus channelStatus;
 }

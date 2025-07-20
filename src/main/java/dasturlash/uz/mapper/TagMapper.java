@@ -5,6 +5,7 @@ import dasturlash.uz.dto.TagDTO;
 import dasturlash.uz.entity.TagEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface TagMapper extends BaseMapper<TagDTO, TagEntity> {
@@ -17,5 +18,5 @@ public interface TagMapper extends BaseMapper<TagDTO, TagEntity> {
 
     @Override
     @Mapping(target = "id", ignore = true)
-    TagEntity toUpdateEntity(TagDTO dto, TagEntity entity);
+    TagEntity toUpdateEntity(TagDTO dto, @MappingTarget TagEntity entity);
 }

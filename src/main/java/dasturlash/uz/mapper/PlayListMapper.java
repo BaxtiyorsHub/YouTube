@@ -5,6 +5,7 @@ import dasturlash.uz.dto.PlaylistDTO;
 import dasturlash.uz.entity.PlaylistEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface PlayListMapper extends BaseMapper<PlaylistDTO, PlaylistEntity> {
@@ -17,6 +18,6 @@ public interface PlayListMapper extends BaseMapper<PlaylistDTO, PlaylistEntity> 
 
     @Override
     @Mapping(target = "id", ignore = true)
-    PlaylistEntity toUpdateEntity(PlaylistDTO dto, PlaylistEntity entity);
+    PlaylistEntity toUpdateEntity(PlaylistDTO dto,@MappingTarget PlaylistEntity entity);
 
 }

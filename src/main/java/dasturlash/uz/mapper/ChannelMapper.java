@@ -11,11 +11,13 @@ import org.mapstruct.MappingTarget;
 public interface ChannelMapper extends BaseMapper<ChannelDTO, ChannelEntity> {
     @Override
     ChannelDTO toDTO(ChannelEntity entity);
+
     @Override
     @Mapping(target = "id", ignore = true)
     ChannelEntity toEntity(ChannelDTO dto);
+
     @Override
     @Mapping(target = "id", ignore = true)
-    ChannelEntity toUpdateEntity(ChannelDTO dto,@MappingTarget ChannelEntity entity);
+    ChannelEntity toUpdateEntity(ChannelDTO dto, @MappingTarget ChannelEntity entity);
 
 }
